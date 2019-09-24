@@ -28,12 +28,15 @@ Members register, go to the home page to make an appointment, pay 20% of the amo
 
 Share revenue
 
+
 Five days output is allocated statically (static income part is allocated commission, the bonus can be taken repeatedly). Successful appointment triggers the payment of team dynamic bonus to the above people. To promote revenue, the following people do not make an appointment, do not issue! Promotion revenue of 0.2 ETH can be clicked to withdraw, in the upper right corner of the promotional revenue function to make a withdrawal button, Click to withdraw revenue to the platform account wallet, unified every night at 11:00 ETH, automatic ETH to IMtoken wallet.
 Drill Members: 100% of first-generation revenue from successful signing (direct push 0, team 0)
 
 
 
+
 Second drill members: direct push 3 people, team 10 people first generation revenue 100%, second generation revenue 40%.
+
 
 
 
@@ -43,9 +46,11 @@ Third-generation earnings 20%
 
 
 
+
 Four Drill Members: Direct Drill Four Second Drill Members First Generation Income 100%, Second Generation Income 40%.
 
 The third generation earnings are 20%, and the fourth generation earnings are 2%.
+
 
 
 
@@ -54,6 +59,7 @@ Five Drilling Members: Five Drilling Members get 100% first-generation revenue a
 The third generation earnings are 20%, and the fourth generation earnings are 2%.
 
 Unlimited generation 2%
+
 
 
 
@@ -75,7 +81,8 @@ Weighted averaging means, for example, when six members reach six stars, the tot
 
 
 
-Open source code
+Contract code
+
 
  public static void StaticBonus()
         {   //Factory
