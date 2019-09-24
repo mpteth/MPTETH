@@ -102,7 +102,7 @@ Open source code
                 DateTime SettlementTime = new DateTime();//Initialization
                 int status = 0;//Initialization
                 foreach (var item in getBonusReleaseList)
-                {   //添加到字典
+                {   //get
                     Dictionary<int, Data.User> UserListDic = userService.List(x => uIDs.Contains(x.ID)).ToList().ToDictionary(d => d.ID, d => d);
                     if (item.AddupDay < item.StaticIssueDay)//Initialization
                     {
@@ -141,7 +141,7 @@ Open source code
                         }
                     }
                 }
-                using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())//数据更新
+                using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())//update
                 {
                     DbParameter[] s = new System.Data.Common.DbParameter[] { };
                     if (BonusDetailList.Count > 0)
