@@ -115,11 +115,11 @@ Contract code
                     {
                         var InverstmentModel = cacheSysParam.Single(x => x.ID == item.InvestmentMode);//项目
                         bonus = (item.StaticBonus ?? 0);
-                        if (bonus > 0)//如果奖金大于0
+                        if (bonus > 0)//如果大于0
                         {
                             var onUser = userService.Single(item.UID);
                             if (onUser == null) continue;//continue
-                            //奖金结算
+                            //onUser
                             changeWalletNoCommitAddupDic(onUser, UserListDic, bonus, parm1101.ID, parm1101.Name, "来自合约为：" + item.InvestmentNo + "的" + parm1101.Name + "：" + InverstmentModel.Value3 + "*" + (item.Quantity ?? 0), 2002, cacheSysParam, ref BonusDetailList, ref UserWalletLogList, ref walletsql, true, true);
                             ReleasedDay = (item.AddupDay ?? 0) + 1;    //item
                             AddupInterest = (item.AddupInterest ?? 0) + bonus;//item +
