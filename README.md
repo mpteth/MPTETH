@@ -1,4 +1,7 @@
-  
+ ETH-Contract
+
+The world' frist Public Chain Contract Revenue DAPP  
+
 
 ABOUT MPT-ETH
 
@@ -71,7 +74,7 @@ Weighted averaging means, for example, when six members reach six stars, the tot
 
 
 
-开源代码
+Open source code
 
  public static void StaticBonus()
         {   //工厂注入
@@ -91,10 +94,10 @@ Weighted averaging means, for example, when six members reach six stars, the tot
                 List<int> uIDs = getBonusReleaseList.Select(x => x.UID).Distinct().ToList();//签约成功的订单用户ID集合
                 StringBuilder walletsql = new StringBuilder();
                 StringBuilder invermentsql = new StringBuilder();
-                var parm1101 = cacheSysParam.Single(x => x.ID == 1101);//静态奖励参数
+                var parm1101 = cacheSysParam.Single(x => x.ID == 1101);//奖励参数
                 decimal bonus = 0;//初始化奖金金额
                 int ReleasedDay = 0;// 初始化已释放天数
-                decimal AddupInterest = 0;//初始化静态奖金累计收益
+                decimal AddupInterest = 0;//初始化奖金累计收益
                 DateTime SettlementTime = new DateTime();//初始化时间
                 int status = 0;//初始化订单状态
                 foreach (var item in getBonusReleaseList)
@@ -102,7 +105,7 @@ Weighted averaging means, for example, when six members reach six stars, the tot
                     Dictionary<int, Data.User> UserListDic = userService.List(x => uIDs.Contains(x.ID)).ToList().ToDictionary(d => d.ID, d => d);
                     if (item.AddupDay < item.StaticIssueDay)//应释放天数大于已释放天数
                     {
-                        var InverstmentModel = cacheSysParam.Single(x => x.ID == item.InvestmentMode);//投资项目
+                        var InverstmentModel = cacheSysParam.Single(x => x.ID == item.InvestmentMode);//项目
                         bonus = (item.StaticBonus ?? 0);
                         if (bonus > 0)//如果奖金大于0
                         {
