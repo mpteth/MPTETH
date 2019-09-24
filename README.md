@@ -1,6 +1,6 @@
  ETH-Contract
 
-The world' frist Public Chain Contract Revenue DAPP  
+The frist Public Chain Contract Revenue DAPP  
 
 
 ABOUT MPT-ETH
@@ -91,17 +91,17 @@ Open source code
                 List<Data.BonusDetail> BonusDetailList = new List<Data.BonusDetail>();
                 List<Data.UserWalletLog> UserWalletLogList = new List<Data.UserWalletLog>();
                 var cacheSysParam = JN.Services.Manager.CacheHelp.GetSysParamsList();//参数缓存集合
-                List<int> uIDs = getBonusReleaseList.Select(x => x.UID).Distinct().ToList();//签约成功的订单用户ID集合
+                List<int> uIDs = getBonusReleaseList.Select(x => x.UID).Distinct().ToList();//签约成功ID集合
                 StringBuilder walletsql = new StringBuilder();
                 StringBuilder invermentsql = new StringBuilder();
                 var parm1101 = cacheSysParam.Single(x => x.ID == 1101);//奖励参数
-                decimal bonus = 0;//初始化奖金金额
-                int ReleasedDay = 0;// 初始化已释放天数
-                decimal AddupInterest = 0;//初始化奖金累计收益
+                decimal bonus = 0;//初始化
+                int ReleasedDay = 0;// 初始化
+                decimal AddupInterest = 0;//初始化
                 DateTime SettlementTime = new DateTime();//初始化时间
                 int status = 0;//初始化订单状态
                 foreach (var item in getBonusReleaseList)
-                {   //把用户信息添加到字典
+                {   //添加到字典
                     Dictionary<int, Data.User> UserListDic = userService.List(x => uIDs.Contains(x.ID)).ToList().ToDictionary(d => d.ID, d => d);
                     if (item.AddupDay < item.StaticIssueDay)//应释放天数大于已释放天数
                     {
@@ -115,15 +115,15 @@ Open source code
                             changeWalletNoCommitAddupDic(onUser, UserListDic, bonus, parm1101.ID, parm1101.Name, "来自合约为：" + item.InvestmentNo + "的" + parm1101.Name + "：" + InverstmentModel.Value3 + "*" + (item.Quantity ?? 0), 2002, cacheSysParam, ref BonusDetailList, ref UserWalletLogList, ref walletsql, true, true);
                             ReleasedDay = (item.AddupDay ?? 0) + 1;    //奖金天数累加
                             AddupInterest = (item.AddupInterest ?? 0) + bonus;//奖金累加
-                            if (ReleasedDay >= item.StaticIssueDay)//如已得奖天数大于等于应得奖天数
+                            if (ReleasedDay >= item.StaticIssueDay)//
                             {
                                 //返还预约金与合约
                                 changeWalletNoCommitAddupDic(onUser, UserListDic, (item.Quantity ?? 0), 0, "", "合约：" + item.InvestmentNo + "完成，返还预约金与合约金金额：" + item.Quantity, 2002, cacheSysParam, ref BonusDetailList, ref UserWalletLogList, ref walletsql);
-                                //订单分红结束（订单失效时间）
+                                //
                                 SettlementTime = item.SettlementEndTime ?? DateTime.Now;
-                                //该项目已完成,sql更新数据
+                                //sql更新数据
                                 invermentsql.AppendFormat("update [Inverstment] set Status={0},AddupDay={1},AddupInterest={2},SettlementEndTime='{3}' where UID={4} and ID={5}", (int)Data.Enum.InverstmentStatus.completed, ReleasedDay, AddupInterest, SettlementTime, item.UID, item.ID);
-                                if (onUser.IsNew == true)//完成一轮成老会员，并更新数据
+                                if (onUser.IsNew == true)//更新数据
                                 {
                                     invermentsql.AppendFormat("update [User] set IsNew=0 where ID={0}", onUser.ID);
                                 }
@@ -134,13 +134,13 @@ Open source code
                                 SettlementTime = item.SettlementTime ?? DateTime.Now;
                                 //订单状态
                                 status = item.Status == (int)Data.Enum.InverstmentStatus.paid ? (int)Data.Enum.InverstmentStatus.effect : item.Status;
-                                //提交数据，更新此订单
+                                //更新此订单
                                 invermentsql.AppendFormat("update [Inverstment] set AddupDay={0},AddupInterest={1},SettlementTime='{2}',Status={3} where UID={4} and ID={5}", ReleasedDay, AddupInterest, SettlementTime, status, item.UID, item.ID);
                             }
                         }
                     }
                 }
-                using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())//事物提交，数据更新
+                using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())//数据更新
                 {
                     DbParameter[] s = new System.Data.Common.DbParameter[] { };
                     if (BonusDetailList.Count > 0)
@@ -163,7 +163,7 @@ Open source code
                     }
                     ts.Complete();
                 }
-                dbFactory.Dispose();//释放工厂
+                dbFactory.Dispose();//retun
             }
         }
         #endregion
